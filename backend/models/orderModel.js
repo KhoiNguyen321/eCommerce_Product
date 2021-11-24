@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const orderchema = mongoose.Schema(
   {
-    // Comment
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
