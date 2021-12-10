@@ -15,7 +15,7 @@ const App = () => {
         <Container>
           <Routes>
             <Route path='/' element={<HomeScreen />} exact />
-            <Route path='/product/:slug' element={<ProductsScreen />} />
+            <Route path='/product/:id' element={<ProductsScreen />} />
           </Routes>
         </Container>
       </main>
