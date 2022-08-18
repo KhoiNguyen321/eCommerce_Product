@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
-import Product from "../components/Product";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import { useDispatch, useSelector } from "react-redux";
-import { listProducts } from "../actions/productActions";
+import React, { useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import Product from '../components/Product';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProducts } from '../actions/productActions';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const HomeScreen = () => {
     <>
       <h1>Lasted Products</h1>
       {loading ? (
-        <Loader /> 
+        <Loader />
       ) : typeof products === 'string' ? (
         <Message variant='danger'>{products}</Message>
       ) : (

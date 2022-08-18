@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Row,
   Col,
@@ -7,13 +7,13 @@ import {
   Card,
   Button,
   FormControl,
-} from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
-import Rating from "../components/Rating";
-import { useDispatch, useSelector } from "react-redux";
-import { listProductDetails } from "../actions/productActions.js";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
+} from 'react-bootstrap';
+import { Link, useLocation } from 'react-router-dom';
+import Rating from '../components/Rating';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProductDetails } from '../actions/productActions.js';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 import { useNavigate } from 'react-router-dom';
 
 const ProductScreen = ({}) => {
@@ -26,7 +26,7 @@ const ProductScreen = ({}) => {
 
   const location = useLocation();
   const slug = location.pathname.substring(
-    location.pathname.lastIndexOf("/") + 1,
+    location.pathname.lastIndexOf('/') + 1,
     location.length
   );
 
@@ -35,25 +35,25 @@ const ProductScreen = ({}) => {
   }, [dispatch, slug]);
 
   const addToCartHandler = () => {
-    navigate(`/cart/${slug}?qty=${qty}`)
-  }
+    navigate(`/cart/${slug}?qty=${qty}`);
+  };
 
   return (
     <>
-      <Link className="btn btn-light my-3" to="/">
+      <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
           <Col md={6}>
             <Image src={product.image} alt={product.name}></Image>
           </Col>
           <Col md={3}>
-            <ListGroup variant="flush">
+            <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h3>{product.name}</h3>
               </ListGroup.Item>
@@ -71,7 +71,7 @@ const ProductScreen = ({}) => {
           </Col>
           <Col md={3}>
             <Card>
-              <ListGroup variant="flush">
+              <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <Row>
                     <Col>Price</Col>
@@ -86,7 +86,7 @@ const ProductScreen = ({}) => {
                     <Col>
                       <strong>
                         $
-                        {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
+                        {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
                       </strong>
                     </Col>
                   </Row>
@@ -97,7 +97,7 @@ const ProductScreen = ({}) => {
                       <Col>Quantity</Col>
                       <Col>
                         <FormControl
-                          as="select"
+                          as='select'
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
@@ -115,8 +115,8 @@ const ProductScreen = ({}) => {
                   <Row>
                     <Button
                       onClick={addToCartHandler}
-                      className="btn-block"
-                      type="button"
+                      className='btn-block'
+                      type='button'
                       disabled={product.countInStock === 0}
                     >
                       Add To Cart
