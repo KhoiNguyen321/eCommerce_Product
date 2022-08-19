@@ -10,7 +10,7 @@ const products = [
     countInStock: 0,
     rating: 4.5,
     numReviews: 12,
-    color:'red',
+    color: 'red',
   },
   {
     name: 'iPhone 11 Pro 256GB Memory',
@@ -72,6 +72,6 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
-]
+];
 
-export default products
+export default products;
