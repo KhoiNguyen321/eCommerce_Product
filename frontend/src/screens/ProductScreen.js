@@ -11,7 +11,7 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import Rating from '../components/Rating';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProductDetails } from '../actions/productActions.js';
+import { productDetails } from '../actions/productActions.js';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ const ProductScreen = ({}) => {
   );
 
   useEffect(() => {
-    dispatch(listProductDetails(slug));
+    dispatch(productDetails(slug));
   }, [dispatch, slug]);
 
   const addToCartHandler = () => {
