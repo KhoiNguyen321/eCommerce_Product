@@ -30,6 +30,11 @@ const orderchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    totalPrice: {
+      type: Number,
+      required: false,
+      default: 0.0,
+    },
     paymentResult: {
       id: { type: String },
       status: { type: String },
