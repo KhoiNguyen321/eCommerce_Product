@@ -6,7 +6,7 @@ import {
   ListGroup,
   Card,
   Button,
-  FormControl,
+  Form,
 } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import Rating from '../components/Rating';
@@ -16,7 +16,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useNavigate } from 'react-router-dom';
 
-const ProductScreen = ({}) => {
+const ProductScreen = () => {
   const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
 
@@ -96,8 +96,7 @@ const ProductScreen = ({}) => {
                     <Row>
                       <Col>Quantity</Col>
                       <Col>
-                        <FormControl
-                          as='select'
+                        <Form.Select
                           value={qty}
                           onChange={(e) => setQty(e.target.value)}
                         >
@@ -106,7 +105,7 @@ const ProductScreen = ({}) => {
                               {x + 1}
                             </option>
                           ))}
-                        </FormControl>
+                        </Form.Select>
                       </Col>
                     </Row>
                   </ListGroup.Item>

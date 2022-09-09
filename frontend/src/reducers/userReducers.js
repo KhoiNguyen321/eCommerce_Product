@@ -12,11 +12,11 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
-} from "../constants/userConstants.js";
+} from '../constants/userConstants.js';
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
-      return { loading: false };
+      return { loading: true };
     case USER_LOGIN_SUCCESS:
       return { loading: false, userInfo: action.payload };
     case USER_LOGIN_FAIL:
@@ -41,7 +41,6 @@ export const userRegisterReducer = (state = {}, action) => {
   }
 };
 
-
 export const userDetailReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_DETAIL_REQUEST:
@@ -55,7 +54,6 @@ export const userDetailReducer = (state = {}, action) => {
   }
 };
 
-
 export const userUpdateProfileReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_UPDATE_PROFILE_REQUEST:
@@ -68,4 +66,3 @@ export const userUpdateProfileReducer = (state = {}, action) => {
       return state;
   }
 };
-
