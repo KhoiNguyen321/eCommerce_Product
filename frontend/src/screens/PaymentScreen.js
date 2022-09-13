@@ -38,6 +38,7 @@ const PaymentScreen = () => {
                 label='PayPal or Credit Card'
                 name='checkbox'
                 value='PayPal'
+                checked
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
               <Form.Check
