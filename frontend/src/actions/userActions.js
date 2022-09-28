@@ -9,10 +9,12 @@ import {
   USER_DETAIL_SUCCESS,
   USER_DETAIL_FAIL,
   USER_DETAIL_REQUEST,
+  USER_DETAIL_RESET,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
 } from '../constants/userConstants.js';
+import { ORDER_LIST_MY_RESET } from '../constants/orderConstants.js';
 import axios from 'axios';
 
 export const login = (email, password) => async (dispatch, getState) => {
@@ -82,7 +84,7 @@ export const register =
     }
   };
 
-export const getUserDetails = (_id) => async (dispatch, getState) => {
+export const getUserDetails = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_DETAIL_REQUEST,
@@ -90,7 +92,6 @@ export const getUserDetails = (_id) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -98,8 +99,7 @@ export const getUserDetails = (_id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users/${_id}`, config);
-
+    const { data } = await axios.get('/api/users/profile', config);
     dispatch({
       type: USER_DETAIL_SUCCESS,
       payload: data,
@@ -154,5 +154,11 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({
     type: USER_LOGOUT,
+  });
+  dispatch({
+    type: USER_DETAIL_RESET,
+  });
+  dispatch({
+    type: ORDER_LIST_MY_RESET,
   });
 };
