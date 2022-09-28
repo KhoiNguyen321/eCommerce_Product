@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "proshop",
+  "name": "appleshop",
   "version": "1.0.0",
   "description": "MERN shopping cart app",
   "main": "server.js",

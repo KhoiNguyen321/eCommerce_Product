@@ -7,6 +7,7 @@ const orderchema = mongoose.Schema(
       required: false,
       ref: 'User',
     },
+
     orderItems: [
       {
         name: { type: String, required: true },
@@ -67,10 +68,17 @@ const orderchema = mongoose.Schema(
     deliveredAt: {
       type: Date,
     },
+    paymentMethod: {
+      id: { type: String },
+      status: { type: String },
+      update_time: { type: Date },
+      email_address: { type: String },
+    },
   },
   {
     timestamps: true,
-  }
+  },
+  { typeKey: '$type' }
 );
 
 const Order = mongoose.model('Order', orderchema);
