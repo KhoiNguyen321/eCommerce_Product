@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Form, Button, Row, Col, FormGroup } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../actions/userActions';
@@ -20,8 +20,6 @@ const UserRegisterScreen = () => {
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
 
-  // const userRegister = useSelector((state) => state.userRegister);
-  // const { loading, error, userInfo } = userRegister;
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
