@@ -5,15 +5,20 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
-
+import { useLocation } from 'react-router-dom';
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const keyword = location.pathname.substring(
+    location.pathname.lastIndexOf('/') + 1,
+    location.length
+  );
 
   const productList = useSelector((state) => state.productList);
   const { loading, products } = productList;
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>

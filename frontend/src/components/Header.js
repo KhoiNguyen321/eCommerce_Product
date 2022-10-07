@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../actions/userActions';
 import { Link } from 'react-router-dom';
-
+import SearchBox from '../screens/SearchBox';
 const Header = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -13,10 +13,11 @@ const Header = () => {
   };
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <Navbar.Brand href='/'>Apple Shop</Navbar.Brand>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <SearchBox />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'></Nav>
             <Nav>
