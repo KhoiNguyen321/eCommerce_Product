@@ -72,6 +72,30 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
+  {
+    name: 'Samsung Galaxy S22',
+    image: '/images/samsung_s22.jpg',
+    description:
+      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
+    brand: 'Samsung',
+    category: 'Electronics',
+    price: 300,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 12,
+  },
+  {
+    name: 'Iphone 14 Pro Max',
+    image: '/images/iphone-14.jpg',
+    description:
+      'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
+    brand: 'Aplle',
+    category: 'Electronics',
+    price: 1000,
+    countInStock: 15,
+    rating: 4,
+    numReviews: 12,
+  },
 ];
 
 export default products;
