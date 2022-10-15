@@ -4,11 +4,13 @@ import Product from '../components/Product';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
-
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -51,10 +53,16 @@ const HomeScreen = () => {
     number,
     search,
   ]);
-
   return (
     <>
-      <ProductCarousel />
+      <Meta />
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to={'/'} className='btn btn-dark'>
+          Go Back
+        </Link>
+      )}
       <h1>Lasted Products</h1>
       {loading ? (
         <Loader />

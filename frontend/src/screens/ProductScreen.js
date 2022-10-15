@@ -18,6 +18,7 @@ import {
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useNavigate } from 'react-router-dom';
+import Meta from '../components/Meta';
 
 const ProductScreen = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ const ProductScreen = () => {
 
   return (
     <>
+      <Meta title={product.name} />
       <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
