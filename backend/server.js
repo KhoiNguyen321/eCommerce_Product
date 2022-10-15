@@ -18,10 +18,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+app.use(express.json());
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
-app.use(express.json());
 
 const __dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
