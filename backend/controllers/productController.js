@@ -22,6 +22,11 @@ const getProducts = asyncHandler(async (req, res) => {
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
+const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+  res.json(products);
+});
+
 const getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -66,4 +71,4 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById, createProductReview };
+export { getProducts, getProductById, createProductReview, getTopProducts };
