@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-
   const path = location.pathname.split('/')[1];
   const pathPagingBySearch = location.pathname.split('/');
 
@@ -24,7 +23,6 @@ const HomeScreen = () => {
     location.pathname.lastIndexOf('/') + 1,
     location.length
   );
-
   let search = '';
   let number = 1;
   if (pathPagingBySearch.length > 3) {
@@ -71,11 +69,12 @@ const HomeScreen = () => {
       ) : (
         <>
           <Row>
-            {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
-              </Col>
-            ))}
+            {products &&
+              products?.map((product) => (
+                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                  <Product product={product} />
+                </Col>
+              ))}
           </Row>
 
           <Paginate
