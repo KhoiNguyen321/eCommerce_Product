@@ -35,16 +35,13 @@ export const login = (email, password) => async (dispatch, getState) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
       payload: 'Invalid email or password',
     });
   }
-  localStorage.setItem(
-    'userInfo',
-    JSON.stringify(getState().userLogin.userInfo)
-  );
 };
 
 export const register =

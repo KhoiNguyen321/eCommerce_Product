@@ -28,16 +28,11 @@ const ProductCarousel = () => {
           key={product._id}
           onClick={() => navigate(`/product/${product._id}`)}
         >
-          <Image
-            className='d-block w-50'
-            src={product.image}
-            alt={product.name}
-            fluid
-          />
+          <Image fluid src={product.image} alt={product.name} />
           <Carousel.Caption className='carousel-caption'>
-            <h3>
-              {product.name} ${product.price}
-            </h3>
+            <h4>
+              {product.name} (${product.price})
+            </h4>
           </Carousel.Caption>
         </Carousel.Item>
       ))}

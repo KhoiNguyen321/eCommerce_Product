@@ -16,8 +16,8 @@ const Header = () => {
       <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <Navbar.Brand href='/'>Apple Shop</Navbar.Brand>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <SearchBox />
+          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'></Nav>
             <Nav>
