@@ -6,9 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/userActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import { validateLoginForm } from '../utils/validateForm';
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState([]);
+  const setField = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value,
+    });
+  };
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,13 +32,25 @@ const LoginScreen = () => {
   }, [userInfo, navigate, redirect]);
 
   const submitHandler = (e) => {
+    const { email, password } = form;
     e.preventDefault();
+    const errors = validateLoginForm(form);
+    if (errors.length > 0) {
+      setErrors(errors);
+      return;
+    }
     dispatch(login(email, password));
   };
 
   return (
     <FormContainer>
       <h1>Sign In</h1>
+      {errors.length > 0 &&
+        errors.map((err, index) => (
+          <span key={index}>
+            <Message variant='danger'>{err}</Message>
+          </span>
+        ))}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
@@ -39,8 +59,8 @@ const LoginScreen = () => {
           <Form.Control
             type='email'
             placeholder='Email Address'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            onChange={(e) => setField('email', e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='password'>
@@ -48,8 +68,8 @@ const LoginScreen = () => {
           <Form.Control
             type='password'
             placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={form.password}
+            onChange={(e) => setField('password', e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Button type='submit' variant='primary'>
