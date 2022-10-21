@@ -7,13 +7,19 @@ import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { USER_UPDATE_PROFILE_FAIL } from '../constants/userConstants';
 import { listMyOrders } from '../actions/orderActions';
-
+import { ValidateProfileForm } from '../utils/validateForm';
 const ProfileScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState(null);
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,6 +36,28 @@ const ProfileScreen = () => {
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrder, error: errorOrder, orders } = orderListMy;
 
+  const setField = (field, value) => {
+    setForm({
+      ...form,
+      [field]: value,
+    });
+    if (field === 'name') {
+      setName(value);
+    }
+
+    if (field === 'email') {
+      setEmail(value);
+    }
+
+    if (field === 'password') {
+      setPassword(value);
+    }
+
+    if (field === 'confirmPassword') {
+      setConfirmPassword(value);
+    }
+  };
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login');
@@ -45,20 +73,26 @@ const ProfileScreen = () => {
       } else {
         setName(user.name);
         setEmail(user.email);
+        setForm({ name: user.name, email: user.email });
       }
     }
   }, [navigate, dispatch, userInfo, user]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage('Password do not match');
-      dispatch({
-        type: USER_UPDATE_PROFILE_FAIL,
-      });
+    const errors = ValidateProfileForm(form);
+    if (errors.length > 0) {
+      setErrors(errors);
+      return;
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
-      setMessage('');
+      setErrors([]);
+      if (form.password !== form.confirmPassword) {
+        dispatch({
+          type: USER_UPDATE_PROFILE_FAIL,
+        });
+      } else {
+        dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      }
     }
   };
   const orderDetails = (id) => {
@@ -68,11 +102,17 @@ const ProfileScreen = () => {
     <Row>
       <Col md={3}>
         <h1>User Profile</h1>
-        {message && <Message variant='danger'>{message}</Message>}
+        {errors.length > 0
+          ? errors.map((err, index) => (
+              <span key={index}>
+                <Message variant='danger'>{err}</Message>
+              </span>
+            ))
+          : success && (
+              <Message variant='success'>Update profile is successed</Message>
+            )}
         {error && <Message variant='danger'>{error}</Message>}
-        {success && (
-          <Message variant='success'>Update profile is successed</Message>
-        )}
+
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>
@@ -81,7 +121,7 @@ const ProfileScreen = () => {
               type='name'
               placeholder='Name'
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setField('name', e.target.value)}
             ></Form.Control>
           </Form.Group>
 
@@ -91,7 +131,7 @@ const ProfileScreen = () => {
               type='email'
               placeholder='Email Address'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setField('email', e.target.value)}
             ></Form.Control>
           </Form.Group>
 
@@ -101,7 +141,7 @@ const ProfileScreen = () => {
               type='password'
               placeholder='Password'
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setField('password', e.target.value)}
             ></Form.Control>
           </Form.Group>
 
@@ -111,7 +151,7 @@ const ProfileScreen = () => {
               type='password'
               placeholder='Confirm Password'
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => setField('confirmPassword', e.target.value)}
             ></Form.Control>
           </Form.Group>
 
