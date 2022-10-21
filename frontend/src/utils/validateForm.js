@@ -25,7 +25,7 @@ export const ValidateProfileForm = (form) => {
   if (!name) {
     newErrors.push('Name can not be empty');
   }
-  if (name.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+  if (name.match(/[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/)) {
     newErrors.push('Name do not contain special characters');
   }
 
