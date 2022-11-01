@@ -13,6 +13,7 @@ import UserRegisterScreen from './screens/UserRegisterScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import UserListScreen from './screens/UserListScreen';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
               element={<HomeScreen />}
               exact
             />
+            <Route path='/admin/userList' element={<UserListScreen />} exact />
 
             <Route path='/' element={<HomeScreen />} exact />
           </Routes>
